@@ -25,10 +25,13 @@ class UpdateController extends Controller
             CURLOPT_CUSTOMREQUEST => 'GET',
         ));
 
-        $response = curl_exec($curl);
+        $response = json_decode(curl_exec($curl), true);
 
         curl_close($curl);
-        echo $response;
+        $user = User::first();
+        $user->balance = str_replace(",", "", $response["balance"]);;
+        $user->save();
+        return "Sukses memperbarui data";
     }
 
     public function updateAllStatus() {
