@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_order');
             $table->string('phone');
             $table->text('message');
             $table->string('image')->nullable();
@@ -22,15 +22,20 @@ return new class extends Migration
             $table->integer('price');
             $table->date('send_date')->nullable();
             $table->time('send_time', $precision = 0)->nullable();
-            $table->enum('status', ['Waiting', 'Sent', 'Delivered', 'Error', 'Readed', 'Failed']);
+            $table->string('status');
+            $table->unsignedBigInteger('type');
+            $table->foreign('type')
+                ->references('id_service')
+                ->on('services')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('message_id')->nullable();
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')
-                ->references('id')
+                ->references('id_user')
                 ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->enum('type', ['wareguler', 'reguler']);
-            $table->string('message_id')->nullable();
             $table->timestamps();
         });
     }

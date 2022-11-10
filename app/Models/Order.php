@@ -9,6 +9,8 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_order';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -37,6 +39,8 @@ class Order extends Model
         'users_id',
         'type',
         'message_id',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     /**
@@ -45,8 +49,6 @@ class Order extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'send_date'  => 'date',
-        'send_time'  => 'time',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];

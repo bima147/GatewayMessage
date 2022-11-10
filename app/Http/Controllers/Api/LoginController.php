@@ -18,16 +18,20 @@ class LoginController extends Controller
     {
         //set validation
         $validator = Validator::make($request->all(), [
-            'email'     => 'required',
+            'email'     => 'required|email',
             'password'  => 'required'
+        ],[
+            'email.required'    =>  'Email tidak boleh kosong!',
+            'email.email'       =>  'Data yang dimasukkan bukanlah email!',
+            'password.required' =>  'Password tidak boleh kosong!',
         ]);
 
         //if validation fails
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'data'    => '',
-                'message' => $validator->errors(),
+                'data'    => $validator->errors(),
+                'message' => 'Login tidak berhasil!',
                 'code'    => 422
             ], 422);
         }
@@ -51,7 +55,7 @@ class LoginController extends Controller
             'data'    => [
                 'token' => $token
             ],
-            'message' => "Login",
+            'message' => "Login berhasil!",
             'code'    => 200
         ]);
     }
