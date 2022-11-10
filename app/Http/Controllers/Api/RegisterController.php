@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
-use App\Models\Balance;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -25,6 +24,12 @@ class RegisterController extends Controller
             'email'     => 'required|email|unique:users',
             'phone'     => 'required|min:10|unique:users',
             'password'  => 'required|min:8|confirmed'
+        ],[
+            'name.required'     => 'Nama tidak boleh kosong!',
+            'email.required'    => 'Email tidak boleh kosong!',
+            'phone.required'    => 'No Telepon tidak boleh kosong!',
+            'password.required' => 'Password tidak boleh kosong!',
+            'password.confirmed'=> 'Password tidak sesua!',
         ]);
 
         //if validation fails
@@ -40,20 +45,15 @@ class RegisterController extends Controller
         //create user
         $user = User::create([
             'name'      => $request->name,
+            'balance'   => 0,
             'email'     => $request->email,
             'phone'     => $request->phone,
             // 'password'  => bcrypt($request->password)
             'password'  => Hash::make($request->password)
         ]);
 
-        //create user
-        $balance = Balance::create([
-            'nominal'   => 0,
-            'users_id'  => $user->id,
-        ]);
-
         //return response JSON user is created
-        if($user && $balance) {
+        if($user) {
             return response()->json([
                 'success' => true,
                 'user'    => $user,

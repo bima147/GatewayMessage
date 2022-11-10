@@ -26,6 +26,9 @@ Route::post('/register', 'Api\RegisterController')->name('register');
  */
 Route::post('/login', 'Api\LoginController')->name('login');
 Route::post('/status/{service}/{messageId}', 'UpdateController@getStatus');
+Route::get('/status', 'UpdateController@updateAllStatus');
+Route::get('/sendOrder', 'UpdateController@sendOrder');
+Route::get('/admin/balance', 'UpdateController@balance');
 
 /**
  * route using middleware
@@ -36,11 +39,19 @@ Route::group(['middleware' => 'auth:api'], function () {
      */
     Route::post('/user/profile', 'Api\UserController@profile')->name('profile');
     Route::post('/user/change-password', 'Api\UserController@changePassword')->name('change-password');
+    Route::post('/logout', 'Api\LogoutController')->name('logout');
+
+    /**
+     * Service
+     */
+    Route::post('/admin/service', 'Api\ServiceController@add')->name('add-service');
+    Route::get('/admin/services', 'Api\ServiceController@getServices')->name('get-service');
+    Route::get('/admin/service/{name}', 'Api\ServiceController@getServicesByName')->name('get-service-by-name');
+    Route::post('/admin/service/edit/{name}', 'Api\ServiceController@edit')->name('edit-service-by-name');
+    Route::post('/admin/service/delete', 'Api\ServiceController@delete')->name('delete-service');
 
     /**
      * Order
      */
-    Route::post('/order', 'Api\OrderController@order')->name('profile');
-
-    Route::post('/logout', 'Api\LogoutController')->name('logout');
+    Route::post('/order', 'Api\OrderController@order')->name('order');
 });

@@ -13,12 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('balances', function (Blueprint $table) {
-            $table->id();
-            $table->integer('nominal');
+        Schema::create('services', function (Blueprint $table) {
+            $table->id('id_service');
+            $table->string('name')->unique();
+            $table->integer('max_char');
+            $table->integer('price');
+            $table->string('type');
+            $table->enum('status', ['active', 'inactive']);
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')
-                ->references('id')
+                ->references('id_user')
                 ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
@@ -33,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('balances');
+        Schema::dropIfExists('services');
     }
 };
