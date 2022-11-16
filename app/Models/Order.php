@@ -39,8 +39,8 @@ class Order extends Model
         'users_id',
         'type',
         'message_id',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
+        'created_at',
+        'updated_at',
     ];
 
     /**

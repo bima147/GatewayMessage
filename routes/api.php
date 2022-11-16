@@ -54,4 +54,13 @@ Route::group(['middleware' => 'auth:api'], function () {
      * Order
      */
     Route::post('/order', 'Api\OrderController@order')->name('order');
+
+    /**
+     * Contact
+     */
+    Route::post('/contact', 'Api\ContactController@create')->name('add-contact');
+    Route::get('/contacts', 'Api\ContactController@show')->name('list-contact');
+    Route::get('/contact/{find}', 'Api\ContactController@searchContact')->name('search-contact');
+    Route::post('/contact/edit/{find}', 'Api\ContactController@editContact')->name('edit-contact');
+    Route::post('/contact/delete', 'Api\ContactController@deleteContact')->name('delete-contact');
 });
