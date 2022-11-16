@@ -24,6 +24,7 @@ class OrderController extends Controller
         $validator = Validator::make($request->all(), [
             'type'         => 'required|in:SMS,Whatsapp,Voice',
         ],[
+            'type.required'=> 'Service tidak boleh kosong!',
             'type.in'      => 'Service hanya tersedia SMS, Whatsapp, Voice',
         ]);
 
@@ -43,16 +44,19 @@ class OrderController extends Controller
         $time = $datetime->format('H:i:s');
         
         $validator = Validator::make($request->all(), [
-            'phone'        => 'required|min:10',
-            'type'         => 'required|in:SMS,Whatsapp',
+            'phone'        => 'required|numeric|digits_between:10,14',
             'send_date'    => 'required|after_or_equal:' . $date,
             'message'      => 'required|max:' . $service->max_char,
             'send_time'    => 'required',
         ],[
-            'phone.min'    => 'Nomer yang dimasukkan kurang dari 10 angka!',
-            'message.max'  => 'Jumlah huruf yang dimasukkan melebihi batas maksimal!',
-            'type.in'      => 'Service hanya tersedia SMS dan Whatsapp',
-            'send_date.after_or_equal'=> 'Tanggal yang dimasukkan tidak dapat sebelum tanggal ' . $date,
+            'phone.required'            => 'Nomer telepon tidak boleh kosong!',
+            'phone.numeric'             => 'Nomer telepon yang anda masukkan bukan angka!',
+            'phone.digits_between'      => 'Nomer yang dimasukkan kurang dari 10 angka atau lebih dari 13!',
+            'send_date.required'        => 'Tanggal pengiriman tidak boleh kosong!',
+            'send_date.after_or_equal'  => 'Tanggal yang dimasukkan tidak dapat sebelum tanggal ' . $date,
+            'message.required'          => 'Jumlah huruf yang dimasukkan melebihi batas maksimal!',
+            'message.max'               => 'Jumlah huruf yang dimasukkan melebihi batas maksimal!',
+            'send_time.required'        => 'Waktu pengiriman tidak boleh kosong!',
         ]);
 
         //if validation fails
@@ -172,5 +176,12 @@ class OrderController extends Controller
                 ], 200);
             }
         }
+        //return JSON process insert failed 
+        return response()->json([
+            'success' => false,
+            'user'    => '',
+            'message' => 'Pemesanan gagal dilakukan!',
+            'code'    => 409
+        ], 409);
     }
 }

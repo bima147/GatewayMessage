@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class Contact extends Model
 {
     use HasFactory;
     
-    protected $primaryKey = 'id_service';
+    protected $primaryKey = 'id_contact';
 
     /**
      * The attributes that are mass assignable.
@@ -18,10 +18,7 @@ class Service extends Model
      */
     protected $fillable = [
         'name',
-        'max_char',
-        'price',
-        'type',
-        'status',
+        'phone',
         'users_id',
     ];
 
@@ -31,11 +28,10 @@ class Service extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'id_service',
-        'type',
+        'id_contact',
         'users_id',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     /**
