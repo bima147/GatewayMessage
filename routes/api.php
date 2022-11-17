@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth:api'], function () {
      */
     Route::post('/user/profile', 'Api\UserController@profile')->name('profile');
     Route::post('/user/change-password', 'Api\UserController@changePassword')->name('change-password');
-    Route::post('/logout', 'Api\LogoutController')->name('logout');
+    Route::post('/user/logout', 'Api\UserController@logout')->name('logout');
 
     /**
      * Service

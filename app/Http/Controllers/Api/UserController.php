@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\JWTException;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\TokenExpiredException;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\TokenInvalidException;
 
 class UserController extends Controller
 {
@@ -34,6 +37,10 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'oldPassword'      => 'required',
             'newPassword'      => 'required|min:8|confirmed',
+        ],[
+            'oldPassword.required'      => 'Password lama tidak boleh kosong!',
+            'newPassword.required'      => 'Password lama tidak boleh kosong!',
+            'newPassword.confirmed'     => 'Password baru dengan konfirmasi password tidak sesuai!',
         ]);
 
         //if validation fails
@@ -47,7 +54,7 @@ class UserController extends Controller
         }
 
         if(password_verify($request->oldPassword, $request->user()->password)) {
-            $user = User::where('id', $request->user()->id)->update(['password'  => Hash::make($request->newPassword)]);
+            $user = User::where('id_user', $request->user()->id_user)->update(['password'  => Hash::make($request->newPassword)]);
             
             //return JSON process update failed 
             if($user) {
@@ -73,5 +80,21 @@ class UserController extends Controller
             'message' => 'Password yang anda masukkan salah!',
             'code'    => 406
         ], 406);
+    }
+
+    public function logout(Request $request)
+    {
+        //remove token
+        $removeToken = JWTAuth::invalidate(JWTAuth::getToken());
+        
+        if($removeToken) {
+            //return response JSON
+            return response()->json([
+                'success' => true,
+                'data'    => '',
+                'message' => 'Logout Berhasil!',  
+                'code'    => 200
+            ]);
+        }
     }
 }

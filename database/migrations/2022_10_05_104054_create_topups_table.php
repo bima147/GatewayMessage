@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('topups', function (Blueprint $table) {
             $table->id('id_topup');
+            $table->string('topup_number')->unique();
+            $table->integer('amount');
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')
                 ->references('id_user')

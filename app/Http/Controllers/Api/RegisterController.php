@@ -35,7 +35,7 @@ class RegisterController extends Controller
             'phone.unique'          => 'No Telepon sudah terdaftar!',
             'password.required'     => 'Password tidak boleh kosong!',
             'password.min'          => 'Password minimal 8 karakter!',
-            'password.confirmed'    => 'Password tidak sesua!',
+            'password.confirmed'    => 'Password tidak sesuai!',
         ]);
 
         //if validation fails
