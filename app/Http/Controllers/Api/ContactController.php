@@ -222,7 +222,7 @@ class ContactController extends Controller
                 'data'    => [
                     'service'      => $contact
                 ],
-                'message' => 'Kontak dihapus!',
+                'message' => 'Kontak berhasil dihapus!',
                 'code'    => 200
             ], 200);
         }
