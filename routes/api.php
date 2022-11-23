@@ -24,7 +24,7 @@ Route::post('/register', 'Api\RegisterController')->name('register');
  * route "/login"
  * @method "POST"
  */
-Route::post('/users/login', 'Api\LoginController')->name('login');
+Route::post('/user/login', 'Api\LoginController')->name('login');
 Route::post('/status/{service}/{messageId}', 'UpdateController@getStatus');
 Route::get('/status', 'UpdateController@updateAllStatus');
 Route::get('/sendOrder', 'UpdateController@sendOrder');
@@ -44,11 +44,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     /**
      * Service
      */
-    Route::post('/admin/service', 'Api\ServiceController@add')->name('add-service');
-    Route::get('/admin/services', 'Api\ServiceController@getServices')->name('get-service');
-    Route::get('/admin/service/{name}', 'Api\ServiceController@getServicesByName')->name('get-service-by-name');
-    Route::post('/admin/service/edit/{name}', 'Api\ServiceController@edit')->name('edit-service-by-name');
-    Route::post('/admin/service/delete', 'Api\ServiceController@delete')->name('delete-service');
+    Route::post('/admin/service', 'Api\Admin\ServiceController@add')->name('add-service');
+    Route::get('/admin/services', 'Api\Admin\ServiceController@getServices')->name('get-service');
+    Route::get('/admin/service/{name}', 'Api\Admin\ServiceController@getServicesByName')->name('get-service-by-name');
+    Route::post('/admin/service/edit/{name}', 'Api\Admin\ServiceController@edit')->name('edit-service-by-name');
+    Route::post('/admin/service/delete', 'Api\Admin\ServiceController@delete')->name('delete-service');
 
     /**
      * Order
