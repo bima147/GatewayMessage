@@ -1,5 +1,5 @@
 ---
 deployment:
-  tasks:
-  - export DEPLOYPATH=/home/tugj9522/Github/GatewayMessage
-  - /bin/cp -r * $DEPLOYPATH
+tasks:
+- export DEPLOYPATH=/home/tugj9522/Github/GatewayMessage
+- /bin/cp -r * $DEPLOYPATH
