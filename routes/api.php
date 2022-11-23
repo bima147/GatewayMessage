@@ -24,7 +24,7 @@ Route::post('/register', 'Api\RegisterController')->name('register');
  * route "/login"
  * @method "POST"
  */
-Route::post('/user/login', 'Api\LoginController')->name('login');
+Route::post('/users/login', 'Api\LoginController')->name('login');
 Route::post('/status/{service}/{messageId}', 'UpdateController@getStatus');
 Route::get('/status', 'UpdateController@updateAllStatus');
 Route::get('/sendOrder', 'UpdateController@sendOrder');
