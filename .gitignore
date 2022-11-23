@@ -15,4 +15,3 @@ yarn-error.log
 /.idea
 /.vscode
 app/Http/Controllers/UpdateController.php
-app/Http/Controllers/UpdateController.php
