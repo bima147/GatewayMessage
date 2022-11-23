@@ -14,4 +14,4 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-app\Http\Controllers\UpdateController.php
+app/Http/Controllers/UpdateController.php
