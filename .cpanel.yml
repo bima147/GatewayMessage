@@ -4,4 +4,4 @@ deployment:
  
  - export DEPLOYPATH=/home/tugj9522/Github/GatewayMessage
  
- - /usr/bin/rsync -Paz * $DEPLOYPATH --delete
+ - /bin/cp -r * $DEPLOYPATH
