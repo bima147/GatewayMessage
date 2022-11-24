@@ -430,6 +430,15 @@ class OrderController extends Controller
             ], 422);
         }
 
+        if($orderCanceled->status != "Waiting") {
+            return response()->json([
+                'success' => true,
+                'data'    => '',
+                'message' => 'Pesanan tidak dapat dibatalkan!',
+                'code'    => 200
+            ], 200);
+        }
+
         $orderCanceled->status = 'Canceled';
         $orderCanceled->save();
 
