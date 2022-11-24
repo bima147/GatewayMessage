@@ -184,4 +184,27 @@ class OrderController extends Controller
             'code'    => 409
         ], 409);
     }
+
+    public function getOrder(Request $request)
+    {
+        $order = Service::where('users_id', $request->user()->id_user)->get();
+        
+        if($order) {
+            return response()->json([
+                'success' => true,
+                'data'    => [
+                    'order'      => $service
+                ],
+                'message' => 'Berhasil mendapatkan data pesanan!',
+                'code'    => 201
+            ], 201);
+        }
+        
+        return response()->json([
+            'success' => false,
+            'data'    => '',
+            'message' => 'Anda belum mempunyai pesanan, silahkan melakukan pemesanan terlebih dahulu!',
+            'code'    => 406
+        ], 406);
+    }
 }

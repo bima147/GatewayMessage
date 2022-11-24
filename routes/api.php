@@ -54,6 +54,7 @@ Route::group(['middleware' => 'auth:api'], function () {
      * Order
      */
     Route::post('/order', 'Api\OrderController@order')->name('order');
+    Route::get('/orders', 'Api\OrderController@getOrder')->name('get-order');
 
     /**
      * Contact
