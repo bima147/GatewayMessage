@@ -193,7 +193,7 @@ class OrderController extends Controller
             return response()->json([
                 'success' => true,
                 'data'    => [
-                    'order'      => $service
+                    'order'      => $order
                 ],
                 'message' => 'Berhasil mendapatkan data pesanan!',
                 'code'    => 201
