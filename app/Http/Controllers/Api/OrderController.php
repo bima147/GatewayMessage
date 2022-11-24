@@ -442,6 +442,10 @@ class OrderController extends Controller
         $orderCanceled->status = 'Canceled';
         $orderCanceled->save();
 
+        $users = User::find($request->user()->id_user)->first();
+        $users->balance = $request->user()->balance + $orderCanceled->price;
+        $users->save();
+
         if($orderCanceled) {
             return response()->json([
                 'success' => true,
