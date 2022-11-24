@@ -187,7 +187,7 @@ class OrderController extends Controller
 
     public function getOrder(Request $request)
     {
-        $order = Service::where('users_id', $request->user()->id_user)->get();
+        $order = Order::where('users_id', $request->user()->id_user)->get();
         
         if($order) {
             return response()->json([
