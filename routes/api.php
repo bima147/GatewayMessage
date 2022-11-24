@@ -55,7 +55,7 @@ Route::group(['middleware' => 'auth:api'], function () {
      */
     Route::post('/order', 'Api\OrderController@order')->name('order');
     Route::get('/orders', 'Api\OrderController@getOrder')->name('get-order');
-    Route::get('/order/{find}', 'Api\OrderController@getOrderByID')->name('get-order-by-id');
+    Route::get('/orders/{find}', 'Api\OrderController@getOrderByID')->name('get-order-by-id');
     Route::post('/order/update/{find}', 'Api\OrderController@updateOrder')->name('update-order');
     Route::post('/order/cancel', 'Api\ContactController@cancelOrder')->name('cancel-order');
 
@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth:api'], function () {
      */
     Route::post('/contact', 'Api\ContactController@create')->name('add-contact');
     Route::get('/contacts', 'Api\ContactController@show')->name('list-contact');
-    Route::get('/contact/{find}', 'Api\ContactController@searchContact')->name('search-contact');
+    Route::get('/contacts/{find}', 'Api\ContactController@searchContact')->name('search-contact');
     Route::post('/contact/edit/{find}', 'Api\ContactController@editContact')->name('edit-contact');
     Route::post('/contact/delete', 'Api\ContactController@deleteContact')->name('delete-contact');
 });
