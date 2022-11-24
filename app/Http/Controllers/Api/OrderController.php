@@ -45,17 +45,17 @@ class OrderController extends Controller
         
         $validator = Validator::make($request->all(), [
             'phone'        => 'required|numeric|digits_between:10,14',
-            'send_date'    => 'required|after_or_equal:' . $date,
             'message'      => 'required|max:' . $service->max_char,
+            'send_date'    => 'required|after_or_equal:' . $date,
             'send_time'    => 'required',
         ],[
             'phone.required'            => 'Nomer telepon tidak boleh kosong!',
             'phone.numeric'             => 'Nomer telepon yang anda masukkan bukan angka!',
             'phone.digits_between'      => 'Nomer yang dimasukkan kurang dari 10 angka atau lebih dari 13!',
-            'send_date.required'        => 'Tanggal pengiriman tidak boleh kosong!',
-            'send_date.after_or_equal'  => 'Tanggal yang dimasukkan tidak dapat sebelum tanggal ' . $date,
             'message.required'          => 'Pesan tidak boleh kosong!',
             'message.max'               => 'Jumlah huruf yang dimasukkan melebihi batas maksimal!',
+            'send_date.required'        => 'Tanggal pengiriman tidak boleh kosong!',
+            'send_date.after_or_equal'  => 'Tanggal yang dimasukkan tidak dapat sebelum tanggal ' . $date,
             'send_time.required'        => 'Waktu pengiriman tidak boleh kosong!',
         ]);
 
