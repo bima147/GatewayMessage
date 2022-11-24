@@ -57,7 +57,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/orders', 'Api\OrderController@getOrder')->name('get-order');
     Route::get('/orders/{find}', 'Api\OrderController@getOrderByID')->name('get-order-by-id');
     Route::post('/order/update/{find}', 'Api\OrderController@updateOrder')->name('update-order');
-    Route::post('/order/cancel', 'Api\ContactController@cancelOrder')->name('cancel-order');
+    Route::post('/order/cancel', 'Api\OrderController@cancelOrder')->name('cancel-order');
 
     /**
      * Contact
