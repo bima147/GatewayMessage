@@ -54,7 +54,7 @@ class OrderController extends Controller
             'phone.digits_between'      => 'Nomer yang dimasukkan kurang dari 10 angka atau lebih dari 13!',
             'send_date.required'        => 'Tanggal pengiriman tidak boleh kosong!',
             'send_date.after_or_equal'  => 'Tanggal yang dimasukkan tidak dapat sebelum tanggal ' . $date,
-            'message.required'          => 'Jumlah huruf yang dimasukkan melebihi batas maksimal!',
+            'message.required'          => 'Pesan tidak boleh kosong!',
             'message.max'               => 'Jumlah huruf yang dimasukkan melebihi batas maksimal!',
             'send_time.required'        => 'Waktu pengiriman tidak boleh kosong!',
         ]);
@@ -266,7 +266,7 @@ class OrderController extends Controller
             'phone.digits_between'      => 'Nomer yang dimasukkan kurang dari 10 angka atau lebih dari 13!',
             'send_date.required'        => 'Tanggal pengiriman tidak boleh kosong!',
             'send_date.after_or_equal'  => 'Tanggal yang dimasukkan tidak dapat sebelum tanggal ' . $date,
-            'message.required'          => 'Jumlah huruf yang dimasukkan melebihi batas maksimal!',
+            'message.required'          => 'Pesan tidak boleh kosong!',
             'message.max'               => 'Jumlah huruf yang dimasukkan melebihi batas maksimal!',
             'send_time.required'        => 'Waktu pengiriman tidak boleh kosong!',
         ]);
