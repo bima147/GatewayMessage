@@ -74,8 +74,8 @@ class OrderController extends Controller
             $request->image_link = '';
             $layanan = 'send' . $service->name;
         }
-        if($request->caption == null) {
-            $request->caption = '';
+        if($request->image_link != null) {
+            $request->caption = $request->message;
         }
         $price = $service->price;
         
