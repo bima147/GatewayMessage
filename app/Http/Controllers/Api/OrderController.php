@@ -231,7 +231,7 @@ class OrderController extends Controller
         ], 406);
     }
 
-    public function updateOrder(Request $request)
+    public function updateOrder(Request $request, $find)
     {
         $validator = Validator::make($request->all(), [
             'type'         => 'required|in:SMS,Whatsapp,Voice',
@@ -256,7 +256,6 @@ class OrderController extends Controller
         $time = $datetime->format('H:i:s');
         
         $validator = Validator::make($request->all(), [
-            'order_id'     => 'required|numeric',
             'phone'        => 'required|numeric|digits_between:10,14',
             'send_date'    => 'required|after_or_equal:' . $date,
             'message'      => 'required|max:' . $service->max_char,
@@ -292,7 +291,7 @@ class OrderController extends Controller
         }
         $price = $service->price;
 
-        $updateOrder = Order::where('id_order', $request->order_id)->first();
+        $updateOrder = Order::where('id_order', $find)->first();
 
         $users = User::find($request->user()->id_user)->first();
         $users->balance = $request->user()->balance + $updateOrder->price;
