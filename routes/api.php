@@ -38,8 +38,9 @@ Route::group(['middleware' => 'auth:api'], function () {
      * User
      */
     Route::post('/user/profile', 'Api\UserController@profile')->name('profile');
-    Route::post('/user/change-password', 'Api\UserController@changePassword')->name('change-password');
-    Route::post('/user/change-profile', 'Api\UserController@changeProfile')->name('change-profile');
+    Route::post('/user/change/password', 'Api\UserController@changePassword')->name('change-password');
+    Route::post('/user/change/profile', 'Api\UserController@changeProfile')->name('change-profile');
+    Route::post('/user/change/key', 'Api\UserController@changeAPI')->name('change-key');
     Route::post('/user/logout', 'Api\UserController@logout')->name('logout');
 
     /**

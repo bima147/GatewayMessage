@@ -129,6 +129,49 @@ class UserController extends Controller
         ], 409);
     }
 
+    public function changeAPI(Request $request)
+    {
+        $ulang = true;
+        $cek = null;
+        $cek1 = null;
+        
+        while($ulang) {
+            $cek = Str::random(15);;
+            $cekUser = User::where('user_key', $cek)->first();
+            if(!$cekUser) {
+                $ulang = false;
+            }
+            $cek1 = Str::random(30);;
+            $cekUser = User::where('pass_key', $cek1)->first();
+            if($cekUser) {
+                $ulang = true;
+            }
+        }
+
+        $user = User::where('id_user', $request->user()->id_user)->first();
+        $user->user_key  = $cek;
+        $user->pass_ket = $cek1;
+        $user->save();
+
+        //return JSON process update failed 
+        if($user) {
+            //return response JSON user password is updated
+            return response()->json([
+                'success' => true,
+                'data'    => $request->user(),
+                'message' => 'Password berhasil diubah!',
+                'code'    => 200
+            ], 200);
+        }
+
+        return response()->json([
+            'success' => false,
+            'user'    => '',
+            'message' => 'Profile gagal diubah!',
+            'code'    => 409
+        ], 409);
+    }
+
     public function logout(Request $request)
     {
         //remove token
