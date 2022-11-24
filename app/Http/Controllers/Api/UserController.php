@@ -82,6 +82,53 @@ class UserController extends Controller
         ], 406);
     }
 
+    public function changeProfile(Request $request)
+    {
+        //set validation
+        $validator = Validator::make($request->all(), [
+            'name'      => 'required',
+            'phone'     => 'required|numeric|digits_between:10,14',
+        ],[
+            'name.reqired'              => 'Nama tidak boleh kosong!',
+            'phone.required'            => 'Nomer telepon tidak boleh kosong!',
+            'phone.numeric'             => 'Nomer telepon yang anda masukkan bukan angka!',
+            'phone.digits_between'      => 'Nomer yang dimasukkan kurang dari 10 angka atau lebih dari 13!',
+        ]);
+
+        //if validation fails
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'data'    => $validator->errors(),
+                'message' => 'Gagal mengubah profile!',
+                'code'    => 422
+            ], 422);
+        }
+
+        $user = User::where('id_user', $request->user()->id_user)->first();
+        $user->name  = $request->name;
+        $user->phone = $request->phone;
+        $user->save();
+
+        //return JSON process update failed 
+        if($user) {
+            //return response JSON user password is updated
+            return response()->json([
+                'success' => true,
+                'data'    => $request->user(),
+                'message' => 'Password berhasil diubah!',
+                'code'    => 200
+            ], 200);
+        }
+
+        return response()->json([
+            'success' => false,
+            'user'    => '',
+            'message' => 'Profile gagal diubah!',
+            'code'    => 409
+        ], 409);
+    }
+
     public function logout(Request $request)
     {
         //remove token
