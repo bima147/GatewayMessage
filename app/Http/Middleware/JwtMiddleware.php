@@ -33,14 +33,14 @@ class JwtMiddleware extends BaseMiddleware
                 return response()->json([
                     'success' => false,
                     'data'    => '',
-                    'message' => 'Token yang sudah kadaluarsa!',
+                    'message' => 'Token sudah kadaluarsa!',
                     'code'    => 401
                 ], 401);
             }else{
                 return response()->json([
                     'success' => false,
                     'data'    => '',
-                    'message' => 'Token yang tidak ditemukan!',
+                    'message' => 'Token tidak ditemukan!',
                     'code'    => 401
                 ], 401);
             }
