@@ -26,23 +26,23 @@ class JwtMiddleware extends BaseMiddleware
                 return response()->json([
                     'success' => false,
                     'data'    => '',
-                    'message' => 'Token yang anda masukkan tidak sah!',
-                    'code'    => 409
-                ], 409);
+                    'message' => 'Token tidak valid!',
+                    'code'    => 401
+                ], 401);
             }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
                 return response()->json([
                     'success' => false,
                     'data'    => '',
-                    'message' => 'Token yang anda masukkan sudah kadaluarsa!',
-                    'code'    => 409
-                ], 409);
+                    'message' => 'Token yang sudah kadaluarsa!',
+                    'code'    => 401
+                ], 401);
             }else{
                 return response()->json([
                     'success' => false,
                     'data'    => '',
-                    'message' => 'Token yang anda masukkan tidak ditemukan!',
-                    'code'    => 409
-                ], 409);
+                    'message' => 'Token yang tidak ditemukan!',
+                    'code'    => 401
+                ], 401);
             }
         }
         return $next($request);
