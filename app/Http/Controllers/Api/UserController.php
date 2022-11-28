@@ -110,11 +110,11 @@ class UserController extends Controller
 
         //return JSON process update failed 
         if($user) {
-            //return response JSON user password is updated
+            //return response JSON user profile is updated
             return response()->json([
                 'success' => true,
                 'data'    => $request->user(),
-                'message' => 'Password berhasil diubah!',
+                'message' => 'Profile berhasil diubah!',
                 'code'    => 200
             ], 200);
         }
