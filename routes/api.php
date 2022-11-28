@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
  * route "/register"
  * @method "POST"
  */
-Route::post('/register', 'Api\RegisterController')->name('register');
+Route::post('/user/register', 'Api\RegisterController')->name('register');
 
 /**
  * route "/login"
@@ -33,7 +33,7 @@ Route::get('/admin/balance', 'UpdateController@balance');
 /**
  * route using middleware
  */
-Route::group(['middleware' => 'auth:api'], function () {
+Route::group(['middleware' => 'jwt.verify'], function () {
     /**
      * User
      */
